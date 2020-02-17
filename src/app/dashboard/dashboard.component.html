@@ -1,0 +1,42 @@
+<div class="dash">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Welcome, {{user.firstName ||user.username}}
+       </mat-card-title>
+      <mat-card-subtitle>Here's your personal information</mat-card-subtitle>
+      <button style="float: right;margin-bottom: 30px" (click)="onLogout()" mat-button color="warn">Logout</button>
+      <button style="float: right;margin-bottom: 30px" *ngIf="!editForm" (click)="onEdit()" mat-button color="primary">Edit</button>
+      <button style="float: right;margin-bottom: 30px" *ngIf="editForm" (click)="onEdit()" mat-button color="primary">Close Edit Form</button>
+    </mat-card-header>
+    <mat-card-content fxLayout="column">
+      <app-user-edit  [userInfo]="user" *ngIf="editForm"></app-user-edit>
+      <mat-card  *ngIf="!editForm">
+        <p>First Name: {{user.firstName ||  'Unfilled'|titlecase}}</p>
+        <p>Last Name: {{user.lastName||  'Unfilled'|titlecase}}</p>
+        <p>Date of Birth: {{  !user.dateOfBirth ? 'Unfilled':user.dateOfBirth | date:'longDate'}}</p>
+        <p>Gender: {{user.gender||  'Unfilled'  |titlecase }}</p>
+      </mat-card>
+      <p>You have {{isFarmsNull() ? 0 :  user.farms.length}} farms registered.</p>
+
+
+    </mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+<mat-tab-group class="tabs">
+  <mat-tab label="Pest Search">
+    <app-pest-search></app-pest-search>
+  </mat-tab>
+  <mat-tab label="Pest Search History">
+    <app-search-history></app-search-history>
+  </mat-tab>
+  <mat-tab label="Pest Information">
+    <app-pest-information></app-pest-information>
+  </mat-tab>
+  <mat-tab label="Standard Practices">
+    <app-standard-practices></app-standard-practices>
+  </mat-tab>
+  <mat-tab label="My Farm(s)">
+    <app-my-farm [farms]="isFarmsNull() ? null:user.farms"></app-my-farm>
+  </mat-tab>
+</mat-tab-group>
+</div>

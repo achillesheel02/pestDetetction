@@ -1,0 +1,37 @@
+<mat-card>
+  <div class="content">
+  <h3>Edit your information</h3>
+    <p *ngIf="updated">Farmer information updated successfully.</p>
+  <form fxLayout="column"  class="login" #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" name="username" [ngModel]="userInfo.username" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" name="firstName" [ngModel]="userInfo.firstName" >
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" name="lastName" [ngModel]="userInfo.lastName" >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Gender</mat-label>
+      <mat-select  name="gender"  [ngModel]="userInfo.gender">
+        <mat-option  *ngFor="let item of gender" [value]="item.value">
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Date of Birth</mat-label>
+      <input matInput  [ngModel]="userInfo.dateOfBirth" name="dateOfBirth"  [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
+    <button type="submit" mat-button [disabled]="form.invalid">Update</button>
+  </form>
+  </div>
+</mat-card>

@@ -1,0 +1,17 @@
+<div class="content">
+  <h3>Login Here</h3>
+  <form fxLayout="column" class="login" #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <mat-form-field appearance="fill">
+  <mat-label>Username</mat-label>
+  <input matInput  type="text"  name="username" ngModel required>
+</mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input matInput type="password"  name="password" ngModel required>
+  </mat-form-field>
+
+  <button type="submit" mat-button [disabled]="form.invalid">Login</button>
+  </form>
+
+</div>
+<button (click)="onSignUp()" mat-raised-button >Sign Up</button>
